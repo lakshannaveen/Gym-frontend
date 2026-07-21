@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+	--bg: #f8f6ef;
+	--surface: #fffdf8;
+	--ink: #11261f;
+	--muted: #5f756d;
+	--brand: #0f766e;
+	--brand-strong: #0a4f4a;
+	--accent: #f97316;
+	--line: #dce7df;
+	--shadow: 0 20px 45px rgba(17, 38, 31, 0.08);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Poppins', 'Trebuchet MS', Verdana, sans-serif;
+	color: var(--ink);
+	background:
+		radial-gradient(circle at 12% 8%, rgba(249, 115, 22, 0.1), transparent 30%),
+		radial-gradient(circle at 95% 22%, rgba(15, 118, 110, 0.12), transparent 32%),
+		linear-gradient(180deg, #fffef9 0%, var(--bg) 100%);
+	min-height: 100dvh;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
+}

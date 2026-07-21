@@ -1,0 +1,19 @@
+<section class="hero">
+  <p class="eyebrow">Fresh weekly drops</p>
+  <h1>Simple, modern ecommerce frontend for your portfolio.</h1>
+  <p class="subtext">
+    Clean UI, responsive layout, reusable product cards, and a practical folder
+    structure you can scale.
+  </p>
+</section>
+
+<section class="toolbar">
+  <h2>Featured Products</h2>
+  <button type="button">View All</button>
+</section>
+
+<section class="grid">
+  @for (product of products; track product.id) {
+    <app-product-card [product]="product"></app-product-card>
+  }
+</section>

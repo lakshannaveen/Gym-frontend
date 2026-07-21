@@ -1,0 +1,17 @@
+<article class="card">
+  <div class="media">
+    @if (product.badge) {
+      <span class="badge">{{ product.badge }}</span>
+    }
+    <img [src]="product.image" [alt]="product.name" loading="lazy" />
+  </div>
+
+  <div class="content">
+    <p class="category">{{ product.category }}</p>
+    <h3>{{ product.name }}</h3>
+    <div class="row">
+      <strong>{{ product.price | currency }}</strong>
+      <button type="button">Add</button>
+    </div>
+  </div>
+</article>
