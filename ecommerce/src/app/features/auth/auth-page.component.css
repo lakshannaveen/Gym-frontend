@@ -1,11 +1,25 @@
+/* auth-page.component.css */
 :host {
   display: block;
+  --brand: #f5c542;
+  --brand-strong: #123a67;
+  --accent: #123a67;
+  --accent-strong: #0a2647;
+  --surface: #ffffff;
+  --line: #e2e8f0;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+  --muted: #4a5b6e;
+  --ink: #0b1a2e;
+  --error: #c62828;
 }
 
 .auth-shell {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 1rem;
+  max-width: 1280px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
 .auth-hero,
@@ -29,7 +43,8 @@
 h1 {
   font-size: clamp(2rem, 4vw, 3.4rem);
   line-height: 1.02;
-  margin: 0;
+  margin: 0 0 0.5rem 0;
+  color: var(--accent-strong);
 }
 
 .auth-hero p:last-child {
@@ -42,7 +57,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.6rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .tabs button,
@@ -53,6 +68,7 @@ h1 {
   padding: 0.8rem 1rem;
   font-weight: 700;
   cursor: pointer;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
 }
 
 .tabs button {
@@ -75,6 +91,7 @@ label {
   gap: 0.45rem;
   color: var(--accent-strong);
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .field-row {
@@ -83,30 +100,107 @@ label {
   gap: 0.75rem;
 }
 
-input {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
   width: 100%;
   border: 1px solid rgba(18, 58, 103, 0.18);
-  border-radius: 0;
-  padding: 0.95rem 0.95rem;
+  border-radius: 8px;
+  padding: 0.85rem 0.95rem;
   background: #fff;
   color: var(--ink);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(245, 197, 66, 0.3);
+}
+
+input.ng-invalid.ng-touched {
+  border-color: var(--error);
+}
+
+.error {
+  color: var(--error);
+  font-weight: 400;
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--brand);
+  cursor: pointer;
+  margin: 0;
+}
+
+.terms-link {
+  color: var(--brand-strong);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.terms-link:hover {
+  color: var(--accent);
 }
 
 .actions {
   display: flex;
   gap: 0.7rem;
   flex-wrap: wrap;
-  margin-top: 0.2rem;
+  margin-top: 0.5rem;
 }
 
 .primary {
   background: var(--brand);
   color: var(--accent-strong);
+  padding: 0.8rem 2rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.primary:hover:not(:disabled) {
+  background: #e0b034;
+}
+
+.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .secondary {
   background: rgba(18, 58, 103, 0.08);
   color: var(--accent-strong);
+  padding: 0.8rem 2rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.secondary:hover {
+  background: rgba(18, 58, 103, 0.15);
 }
 
 @media (max-width: 860px) {
@@ -118,5 +212,17 @@ input {
 @media (max-width: 640px) {
   .field-row {
     grid-template-columns: 1fr;
+  }
+  .auth-hero,
+  .auth-panel {
+    padding: 1rem;
+  }
+  .actions {
+    flex-direction: column;
+  }
+  .primary,
+  .secondary {
+    width: 100%;
+    justify-content: center;
   }
 }

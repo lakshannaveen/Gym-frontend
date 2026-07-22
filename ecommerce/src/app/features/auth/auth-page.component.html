@@ -1,3 +1,4 @@
+<!-- auth-page.component.html -->
 <section class="auth-shell">
   <div class="auth-hero">
     <p class="eyebrow">Sky Sat Lanka account access</p>
@@ -9,41 +10,99 @@
 
   <div class="auth-panel">
     <div class="tabs">
-      <button type="button" class="active">Sign In</button>
-      <button type="button">Create Account</button>
+      <button type="button" 
+              [class.active]="activeTab === 'signin'" 
+              (click)="setTab('signin')">Sign In</button>
+      <button type="button" 
+              [class.active]="activeTab === 'register'" 
+              (click)="setTab('register')">Create Account</button>
     </div>
 
-    <form class="form-grid">
+    <!-- SIGN IN FORM -->
+    <form *ngIf="activeTab === 'signin'" [formGroup]="signInForm" (ngSubmit)="onSignIn()" class="form-grid">
+      <label>
+        Email address
+        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <small class="error" *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
+          Please enter a valid email.
+        </small>
+      </label>
+      <label>
+        Password
+        <input type="password" formControlName="password" placeholder="••••••••" />
+        <small class="error" *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched">
+          Password is required.
+        </small>
+      </label>
+
+      <div class="actions">
+        <button type="submit" class="primary" [disabled]="signInForm.invalid">Sign In</button>
+        <button type="button" class="secondary" (click)="setTab('register')">Create Account</button>
+      </div>
+    </form>
+
+    <!-- REGISTER FORM -->
+    <form *ngIf="activeTab === 'register'" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="form-grid">
       <div class="field-row">
         <label>
           First name
-          <input type="text" placeholder="Kasun" />
+          <input type="text" formControlName="firstName" placeholder="Kasun" />
+          <small class="error" *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
+            First name is required.
+          </small>
         </label>
         <label>
           Last name
-          <input type="text" placeholder="Perera" />
+          <input type="text" formControlName="lastName" placeholder="Perera" />
+          <small class="error" *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
+            Last name is required.
+          </small>
         </label>
       </div>
       <label>
         Email address
-        <input type="email" placeholder="you@example.com" />
+        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <small class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+          Please enter a valid email.
+        </small>
       </label>
       <label>
         Password
-        <input type="password" placeholder="••••••••" />
+        <input type="password" formControlName="password" placeholder="••••••••" />
+        <small class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+          Password must be at least 6 characters.
+        </small>
       </label>
       <label>
         Confirm password
-        <input type="password" placeholder="••••••••" />
+        <input type="password" formControlName="confirmPassword" placeholder="••••••••" />
+        <small class="error" *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched">
+          Passwords do not match.
+        </small>
+        <small class="error" *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched && !registerForm.hasError('passwordMismatch')">
+          Please confirm your password.
+        </small>
       </label>
       <label>
         Phone number
-        <input type="tel" placeholder="+94 7X XXX XXXX" />
+        <input type="tel" formControlName="phone" placeholder="+94 7X XXX XXXX" />
+        <small class="error" *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
+          Please enter a valid phone number (e.g., +94 7X XXX XXXX).
+        </small>
+      </label>
+
+      <!-- Terms and Conditions -->
+      <label class="checkbox-label">
+        <input type="checkbox" formControlName="agreeTerms" />
+        <span>I agree to the <a href="#" class="terms-link">Terms and Conditions</a></span>
+        <small class="error" *ngIf="registerForm.get('agreeTerms')?.invalid && registerForm.get('agreeTerms')?.touched">
+          You must agree to the terms.
+        </small>
       </label>
 
       <div class="actions">
-        <button type="submit" class="primary">Create Account</button>
-        <button type="button" class="secondary">Sign In</button>
+        <button type="submit" class="primary" [disabled]="registerForm.invalid">Create Account</button>
+        <button type="button" class="secondary" (click)="setTab('signin')">Sign In</button>
       </div>
     </form>
   </div>
