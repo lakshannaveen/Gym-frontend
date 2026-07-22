@@ -1,0 +1,105 @@
+:host {
+  display: block;
+}
+
+.page-hero,
+.product-tile {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.page-hero {
+  padding: 1.5rem;
+  border-radius: 26px;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--brand-strong);
+  font-weight: 800;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  line-height: 1.02;
+  max-width: 12ch;
+}
+
+.page-hero p:last-child {
+  max-width: 68ch;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.filter-row {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.filter-row button,
+.product-tile button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filter-row button {
+  background: rgba(18, 58, 103, 0.08);
+  color: var(--accent-strong);
+}
+
+.product-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.product-tile {
+  padding: 1.2rem;
+  border-radius: 22px;
+}
+
+.tag {
+  display: inline-flex;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--brand);
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.product-tile h2 {
+  margin: 0.85rem 0 0.45rem;
+}
+
+.product-tile p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.product-tile strong {
+  display: block;
+  margin-bottom: 0.9rem;
+  color: var(--accent-strong);
+}
+
+.product-tile button {
+  background: var(--accent);
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}

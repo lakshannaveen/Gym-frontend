@@ -1,14 +1,23 @@
 <header class="topbar">
   <div class="brand">
     <span class="dot"></span>
-    <span class="name">NovaCart</span>
+    <div>
+      <span class="eyebrow">Sky Sat Lanka</span>
+      <span class="name">SATELLITE TV SUPPLIER</span>
+    </div>
   </div>
 
   <nav class="links" aria-label="Primary">
-    <a href="#">Shop</a>
-    <a href="#">Collections</a>
-    <a href="#">About</a>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/shop" routerLinkActive="active">Shop</a>
+    <a routerLink="/product" routerLinkActive="active">Product</a>
+    <a routerLink="/tracking" routerLinkActive="active">Track Order</a>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   </nav>
 
-  <button class="cart" type="button">Cart (2)</button>
+  <div class="actions">
+    <button class="cart" type="button">Cart (2)</button>
+    <a class="auth-link" routerLink="/auth" routerLinkActive="active">Sign In</a>
+    <a class="admin-link" routerLink="/auth">Create Account</a>
+  </div>
 </header>

@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1rem;
+}
+
+.checkout-form,
+.checkout-summary {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  border-radius: 26px;
+  padding: 1.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brand-strong);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+.field-grid {
+  margin: 1rem 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+input,
+.primary {
+  border: 1px solid rgba(18, 58, 103, 0.18);
+  padding: 0.95rem;
+}
+
+.primary {
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.checkout-summary strong {
+  display: block;
+  margin: 0.75rem 0;
+  color: var(--accent-strong);
+  font-size: 1.6rem;
+}
+
+.checkout-summary p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,25 @@
+<section class="page-hero">
+  <p class="eyebrow">Sky Sat Lanka catalogue</p>
+  <h1>Shop satellite TV products and installation services.</h1>
+  <p>
+    A client-ready product page for receivers, dishes, accessories, and service packages designed in the requested white, dark blue, and yellow system.
+  </p>
+</section>
+
+<section class="filter-row">
+  @for (filter of filters; track filter) {
+    <button type="button">{{ filter }}</button>
+  }
+</section>
+
+<section class="product-grid">
+  @for (product of products; track product.name) {
+    <article class="product-tile">
+      <span class="tag">Featured</span>
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.note }}</p>
+      <strong>{{ product.price }}</strong>
+      <button type="button">Add to cart</button>
+    </article>
+  }
+</section>

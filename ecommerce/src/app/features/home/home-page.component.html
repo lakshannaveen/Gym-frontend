@@ -1,15 +1,80 @@
-<section class="hero">
-  <p class="eyebrow">Fresh weekly drops</p>
-  <h1>Simple, modern ecommerce frontend for your portfolio.</h1>
-  <p class="subtext">
-    Clean UI, responsive layout, reusable product cards, and a practical folder
-    structure you can scale.
-  </p>
+<section class="hero-panel">
+  <div class="hero-copy">
+    <p class="eyebrow">Premium ecommerce frontend</p>
+    <h1>Bold storefront design with dark blue, yellow, and white contrast.</h1>
+    <p class="subtext">
+      A polished landing page inspired by modern ecommerce wireframes, built as a fully responsive Angular frontend with clear product hierarchy, trust signals, and conversion-focused sections.
+    </p>
+
+    <div class="hero-actions">
+      <button class="primary" type="button">Shop the collection</button>
+      <button class="secondary" type="button">Explore categories</button>
+    </div>
+
+    <ul class="stats" aria-label="Store highlights">
+      @for (stat of stats; track stat.label) {
+        <li>
+          <strong>{{ stat.value }}</strong>
+          <span>{{ stat.label }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-card__top">
+      <span class="pill">Editor's pick</span>
+      <span class="price-tag">From $24</span>
+    </div>
+    <div class="hero-visual">
+      <img
+        src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80"
+        alt="Featured lifestyle products"
+      />
+    </div>
+    <div class="hero-card__bottom">
+      <h2>Curated drops with clean navigation and premium presentation.</h2>
+      <p>Product storytelling, sharp visuals, and a checkout-ready layout.</p>
+    </div>
+  </div>
 </section>
 
-<section class="toolbar">
-  <h2>Featured Products</h2>
-  <button type="button">View All</button>
+<section class="section-slab">
+  <div class="section-heading">
+    <p class="eyebrow">Category overview</p>
+    <h2>Built to surface the right shopping path fast.</h2>
+  </div>
+
+  <div class="category-grid">
+    @for (category of categories; track category.name) {
+      <article class="category-card">
+        <span class="category-card__mark"></span>
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.description }}</p>
+      </article>
+    }
+  </div>
+</section>
+
+<section class="section-slab section-slab--split">
+  <div>
+    <p class="eyebrow">Store benefits</p>
+    <h2>Every section designed to feel intentional.</h2>
+  </div>
+
+  <ul class="benefit-list">
+    @for (benefit of benefits; track benefit) {
+      <li>{{ benefit }}</li>
+    }
+  </ul>
+</section>
+
+<section class="section-header">
+  <div>
+    <p class="eyebrow">Featured products</p>
+    <h2>High-contrast product cards with strong call-to-action.</h2>
+  </div>
+  <button type="button" class="ghost-btn">View all products</button>
 </section>
 
 <section class="grid">
