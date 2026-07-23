@@ -1,29 +1,101 @@
 @if (orderPlaced) {
-  <section class="order-success"><p class="eyebrow">Order received</p><h1>Thank you — your order is being processed.</h1><p>We will contact you shortly to confirm delivery and installation details.</p></section>
+  <section class="order-success">
+    <p class="eyebrow">Order received</p>
+    <h1>Thank you — your order is being processed.</h1>
+    <p>We will contact you shortly to confirm delivery and installation details.</p>
+  </section>
 } @else {
-<section class="checkout-layout">
-  <div class="checkout-form">
-    <p class="eyebrow">Secure checkout</p>
-    <h1>Complete your order</h1>
-    <div class="field-grid">
-      <input type="text" placeholder="Full name" />
-      <input type="text" placeholder="Delivery address" />
-      <input type="tel" placeholder="Phone number" />
-      <input type="email" placeholder="Email address" />
-    </div>
-    <button type="button" class="primary" (click)="placeOrder()" [disabled]="!cart.items().length">Place order</button>
-  </div>
+  <section class="checkout-layout">
+    <div class="checkout-form">
+      <p class="eyebrow">Secure checkout</p>
+      <h1>Complete your order</h1>
+      
+      <div class="field-grid">
+        <!-- Custom Province Dropdown -->
+        <div class="form-group">
+          <label for="province">Province *</label>
+          <div class="custom-dropdown" (click)="toggleDropdown()" (blur)="closeDropdown()" tabindex="0">
+            <div class="dropdown-header" [class.active]="isDropdownOpen">
+              <span class="selected-value">{{ orderDetails.province || 'Select your province' }}</span>
+              <span class="dropdown-arrow" [class.open]="isDropdownOpen">▼</span>
+            </div>
+            @if (isDropdownOpen) {
+              <ul class="dropdown-list">
+                @for (province of provinces; track province) {
+                  <li 
+                    class="dropdown-item" 
+                    [class.selected]="orderDetails.province === province"
+                    (click)="selectProvince(province)">
+                    {{ province }}
+                    @if (orderDetails.province === province) {
+                      <span class="checkmark">✓</span>
+                    }
+                  </li>
+                }
+              </ul>
+            }
+          </div>
+        </div>
 
-  <aside class="checkout-summary">
-    <h2>Order summary</h2>
-    @if (cart.items().length) {
-      @for (item of cart.items(); track item.product.id) { <p>{{ item.product.name }} × {{ item.quantity }}</p> }
-      <strong>{{ cart.totalLkr() | currency:'LKR':'symbol':'1.0-0' }}</strong>
-    } @else {
-      <p>Your cart is currently empty.</p>
-      <strong>LKR 0</strong>
-    }
-    <p>Delivery and installation calculated at confirmation.</p>
-  </aside>
-</section>
+        <!-- City Input -->
+        <div class="form-group">
+          <label for="city">City *</label>
+          <input 
+            id="city"
+            type="text" 
+            placeholder="Enter your city" 
+            [(ngModel)]="orderDetails.city"
+            name="city"
+            required />
+        </div>
+
+        <!-- Payment Method -->
+        <div class="form-group payment-methods">
+          <label>Payment Method *</label>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input 
+                type="radio" 
+                value="cod" 
+                [(ngModel)]="orderDetails.paymentMethod"
+                name="paymentMethod" />
+              <span>Cash on Delivery (COD)</span>
+            </label>
+            <label class="payment-option">
+              <input 
+                type="radio" 
+                value="card" 
+                [(ngModel)]="orderDetails.paymentMethod"
+                name="paymentMethod" />
+              <span>Card Payment</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button 
+        type="button" 
+        class="primary" 
+        (click)="placeOrder()" 
+        [disabled]="!cart.items().length || !orderDetails.province || !orderDetails.city">
+        Place order
+      </button>
+    </div>
+
+    <aside class="checkout-summary">
+      <h2>Order summary</h2>
+      @if (cart.items().length) {
+        <div class="order-items">
+          @for (item of cart.items(); track item.product.id) { 
+            <p>{{ item.product.name }} × {{ item.quantity }}</p>
+          }
+        </div>
+        <strong>{{ cart.totalLkr() | currency:'LKR':'symbol':'1.0-0' }}</strong>
+        <p class="delivery-note">Delivery and installation calculated at confirmation.</p>
+      } @else {
+        <p>Your cart is currently empty.</p>
+        <strong>LKR 0</strong>
+      }
+    </aside>
+  </section>
 }
