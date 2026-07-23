@@ -37,7 +37,7 @@ export class AuthPageComponent {
         confirmPassword: ['', Validators.required],
         phone: [
           '',
-          [Validators.required, Validators.pattern(/^\+94\s?7\d{2}\s?\d{3}\s?\d{4}$/)],
+          [Validators.required, Validators.pattern(/^(0|(\+94))7[01245678]\d{7}$/)],
         ],
         agreeTerms: [false, Validators.requiredTrue],
       },

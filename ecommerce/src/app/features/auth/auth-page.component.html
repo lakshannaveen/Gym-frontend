@@ -1,11 +1,34 @@
 <!-- auth-page.component.html -->
 <section class="auth-shell">
   <div class="auth-hero">
-    <p class="eyebrow">Sky Sat Lanka account access</p>
-    <h1>Sign in or create your account.</h1>
+    <p class="eyebrow">Sky Sat Lanka</p>
+    <h1>Welcome to Sky Sat Lanka</h1>
     <p>
-      A client-ready authentication screen with clear separation between sign in and registration, styled in white, dark blue, and yellow.
+      Your trusted source for satellite TV equipment and accessories in Sri Lanka.
     </p>
+    <div class="hero-features">
+      <div class="feature-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+        <span>Quality Products</span>
+      </div>
+      <div class="feature-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="2">
+          <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        </svg>
+        <span>Secure Shopping</span>
+      </div>
+      <div class="feature-item">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5c542" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        <span>Fast Delivery</span>
+      </div>
+    </div>
   </div>
 
   <div class="auth-panel">
@@ -85,9 +108,9 @@
       </label>
       <label>
         Phone number
-        <input type="tel" formControlName="phone" placeholder="+94 7X XXX XXXX" />
+        <input type="tel" formControlName="phone" placeholder="0774235919" />
         <small class="error" *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
-          Please enter a valid phone number (e.g., +94 7X XXX XXXX).
+          Please enter a valid Sri Lankan phone number (e.g., 0774235919).
         </small>
       </label>
 
