@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SHOP_PRODUCTS, STORE_CATEGORIES } from '../../shared/data/products.data';
 import { ProductCardComponent } from '../products/product-card.component';
 
 @Component({
   selector: 'app-shop-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, ProductCardComponent, RouterLink],
+  imports: [CommonModule, FormsModule, ProductCardComponent],
   templateUrl: './shop-page.component.html',
   styleUrls: ['./shop-page.component.css'],
 })
@@ -17,6 +17,7 @@ export class ShopPageComponent {
   protected readonly products = SHOP_PRODUCTS;
   protected selectedCategory = 'all';
   protected selectedDeal = 'all';
+  protected selectedAvailability = 'all';
   protected sortBy = 'featured';
   protected currentPage = 1;
   protected readonly pageSize = 6;
@@ -50,10 +51,13 @@ export class ShopPageComponent {
 
   get filteredProducts() {
     return this.products.filter((product) => {
-      const categoryMatch = this.selectedCategory === 'all' || product.category.toLowerCase().includes(this.selectedCategory);
+      const selectedCategoryTitle = this.categories.find((category) => category.slug === this.selectedCategory)?.title;
+      const categoryMatch = this.selectedCategory === 'all' || product.category === selectedCategoryTitle;
       const dealMatch = this.selectedDeal === 'all' || (this.selectedDeal === 'sale' ? Boolean(product.compareAtLkr) : (product.deal ?? '').toLowerCase().includes(this.selectedDeal));
+      const availabilityMatch = this.selectedAvailability === 'all'
+        || (this.selectedAvailability === 'low-stock' ? product.stockCount <= 10 : product.stockCount > 0);
 
-      return categoryMatch && dealMatch;
+      return categoryMatch && dealMatch && availabilityMatch;
     });
   }
 
@@ -63,6 +67,10 @@ export class ShopPageComponent {
 
   get pageCount() {
     return Math.max(1, Math.ceil(this.filteredCount / this.pageSize));
+  }
+
+  get hasActiveFilters() {
+    return this.selectedCategory !== 'all' || this.selectedDeal !== 'all' || this.selectedAvailability !== 'all' || this.sortBy !== 'featured';
   }
 
   setCategory(category: string): void {
@@ -75,8 +83,22 @@ export class ShopPageComponent {
     this.currentPage = 1;
   }
 
+  setAvailability(availability: string): void {
+    this.selectedAvailability = availability;
+    this.currentPage = 1;
+  }
+
   setSort(sortBy: string): void {
     this.sortBy = sortBy;
+    this.currentPage = 1;
+  }
+
+  clearFilters(): void {
+    this.selectedCategory = 'all';
+    this.selectedDeal = 'all';
+    this.selectedAvailability = 'all';
+    this.sortBy = 'featured';
+    this.currentPage = 1;
   }
 
   nextPage(): void {

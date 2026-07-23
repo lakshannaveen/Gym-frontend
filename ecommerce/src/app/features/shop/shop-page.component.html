@@ -1,61 +1,71 @@
-<section class="page-hero">
-  <p class="eyebrow">Sky Sat Lanka catalogue</p>
-  <h1>Browse satellite TV products with filters, pricing, and stock info.</h1>
-  <p>
-    The shop page shows all demo products with sale pricing, stock availability, and pagination for a realistic catalogue flow.
-  </p>
-</section>
-
-<section class="shop-layout">
-  <aside class="sidebar">
-    <div class="sidebar-block">
-      <p class="sidebar-label">Category</p>
-      <button type="button" [class.active]="selectedCategory === 'all'" (click)="setCategory('all')">All products</button>
-      @for (category of categories; track category.slug) {
-        <button
-          type="button"
-          [class.active]="selectedCategory === category.slug"
-          (click)="setCategory(category.slug)"
-        >
-          {{ category.title }}
-        </button>
-      }
+<section class="shop-shell">
+  <div class="catalogue-toolbar">
+    <div class="toolbar-copy">
+      <p class="eyebrow">Product catalogue</p>
+      <h1>Find the right satellite equipment.</h1>
+      <p>{{ filteredCount }} products available</p>
     </div>
 
-    <div class="sidebar-block">
-      <p class="sidebar-label">Promotional deals</p>
-      <button type="button" [class.active]="selectedDeal === 'all'" (click)="setDeal('all')">All items</button>
-      <button type="button" [class.active]="selectedDeal === 'sale'" (click)="setDeal('sale')">On sale</button>
-      <button type="button" [class.active]="selectedDeal === 'flash sale'" (click)="setDeal('flash sale')">Flash sale</button>
-    </div>
+    <button type="button" class="clear-button" (click)="clearFilters()" [disabled]="!hasActiveFilters">Clear filters</button>
+  </div>
 
-    <div class="sidebar-block">
-      <p class="sidebar-label">Sort by</p>
-      <select [ngModel]="sortBy" (ngModelChange)="setSort($event)">
+  <div class="filter-bar" aria-label="Catalogue filters">
+    <label>
+      <span>Category</span>
+      <select [(ngModel)]="selectedCategory" (ngModelChange)="setCategory($event)">
+        <option value="all">All categories</option>
+        @for (category of categories; track category.slug) {
+          <option [value]="category.slug">{{ category.title }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span>Offer</span>
+      <select [(ngModel)]="selectedDeal" (ngModelChange)="setDeal($event)">
+        <option value="all">All offers</option>
+        <option value="sale">On sale</option>
+        <option value="flash sale">Flash deals</option>
+      </select>
+    </label>
+
+    <label>
+      <span>Availability</span>
+      <select [(ngModel)]="selectedAvailability" (ngModelChange)="setAvailability($event)">
+        <option value="all">All stock levels</option>
+        <option value="in-stock">In stock</option>
+        <option value="low-stock">Low stock</option>
+      </select>
+    </label>
+
+    <label>
+      <span>Sort by</span>
+      <select [(ngModel)]="sortBy" (ngModelChange)="setSort($event)">
         <option value="featured">Featured</option>
         <option value="price-asc">Price: low to high</option>
         <option value="price-desc">Price: high to low</option>
-        <option value="newest">Newest</option>
+        <option value="newest">Newest arrivals</option>
       </select>
-    </div>
-  </aside>
+    </label>
+  </div>
 
-  <section class="catalogue">
-    <div class="catalogue-topbar">
-      <p>{{ filteredCount }} products found</p>
-      <a routerLink="/cart" class="cart-link">Open cart</a>
-    </div>
-
+  @if (visibleProducts.length) {
     <div class="product-grid">
       @for (product of visibleProducts; track product.slug) {
         <app-product-card [product]="product"></app-product-card>
       }
     </div>
 
-    <div class="pagination">
+    <div class="pagination" aria-label="Catalogue pages">
       <button type="button" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
       <span>Page {{ currentPage }} of {{ pageCount }}</span>
       <button type="button" (click)="nextPage()" [disabled]="currentPage === pageCount">Next</button>
     </div>
-  </section>
+  } @else {
+    <div class="empty-state">
+      <h2>No products match these filters.</h2>
+      <p>Try selecting a different category or offer.</p>
+      <button type="button" (click)="clearFilters()">Show all products</button>
+    </div>
+  }
 </section>
