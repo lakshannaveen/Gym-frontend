@@ -3,7 +3,14 @@
   <!-- Brand / Logo Section -->
   <div class="brand" routerLink="/">
     <div class="logo-wrapper">
-      <img src="assets/logo/sky-sat-lanka-logo.svg" alt="Sky Sat Lanka" class="logo-image" />
+      <!-- REMOVED width and height attributes since fill is used -->
+      <img 
+        ngSrc="images/logo.jpeg" 
+        alt="Sky Sat Lanka" 
+        class="logo-image"
+        priority
+        fill
+      />
     </div>
     <div class="brand-text">
       <span class="company-name">Sky Sat Lanka</span>

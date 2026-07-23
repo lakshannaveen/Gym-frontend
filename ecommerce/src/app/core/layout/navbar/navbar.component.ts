@@ -1,12 +1,12 @@
 // navbar.component.ts
 import { Component, HostListener } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, NgOptimizedImage],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })

@@ -1,4 +1,4 @@
-/* navbar.component.css */
+/* navbar.component.css - Updated with transparent logo wrapper */
 :host {
   display: block;
   position: sticky;
@@ -49,19 +49,34 @@
   width: 48px;
   height: 48px;
   border-radius: 16px;
-  background: linear-gradient(145deg, #0b1e3a, #1a3a6b);
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 4px 12px rgba(11, 30, 58, 0.3);
+  /* REMOVED the blue gradient background */
+  background: transparent;
+  /* REMOVED the shadow */
+  box-shadow: none;
   flex-shrink: 0;
-  padding: 6px;
+  padding: 4px;
+  position: relative;
+  overflow: visible;
 }
 
 .logo-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  display: block;
+}
+
+/* If using NgOptimizedImage with fill */
+.logo-wrapper img {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  padding: 0;
 }
 
 .brand-text {
@@ -497,7 +512,7 @@
     width: 38px;
     height: 38px;
     border-radius: 12px;
-    padding: 4px;
+    padding: 3px;
   }
 
   .company-name {
@@ -580,7 +595,7 @@
   .logo-wrapper {
     width: 32px;
     height: 32px;
-    padding: 3px;
+    padding: 2px;
   }
 
   .company-name {
