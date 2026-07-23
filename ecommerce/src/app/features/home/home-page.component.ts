@@ -1,32 +1,34 @@
 import { Component } from '@angular/core';
-import { PRODUCTS } from '../../shared/data/products.data';
+import { RouterLink } from '@angular/router';
+import { BACKEND_URL } from '../../shared/config/backend-url';
+import { FEATURED_PRODUCTS, FLASH_DEALS, HERO_SLIDES, STORE_CATEGORIES, STORE_STATS } from '../../shared/data/products.data';
 import { ProductCardComponent } from '../products/product-card.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [ProductCardComponent],
+  imports: [ProductCardComponent, RouterLink],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent {
-  protected readonly products = PRODUCTS;
+  protected readonly backendUrl = BACKEND_URL;
+  protected readonly stats = STORE_STATS;
+  protected readonly categories = STORE_CATEGORIES;
+  protected readonly slides = HERO_SLIDES;
+  protected readonly deals = FLASH_DEALS;
+  protected readonly products = FEATURED_PRODUCTS;
+  protected currentSlide = 0;
 
-  protected readonly stats = [
-    { value: '120+', label: 'Curated products' },
-    { value: '24h', label: 'Fast dispatch' },
-    { value: '4.9/5', label: 'Customer rating' },
-  ];
+  selectSlide(index: number): void {
+    this.currentSlide = index;
+  }
 
-  protected readonly categories = [
-    { name: 'Tech essentials', description: 'Smart gear built for daily use' },
-    { name: 'Lifestyle picks', description: 'Accessories that feel premium' },
-    { name: 'Activewear', description: 'Performance pieces with clean design' },
-  ];
+  nextSlide(): void {
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+  }
 
-  protected readonly benefits = [
-    'Premium materials and reliable quality checks',
-    'Flexible payment and quick checkout flow',
-    'Responsive storefront built for modern devices',
-  ];
+  previousSlide(): void {
+    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+  }
 }

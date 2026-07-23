@@ -9,9 +9,19 @@
   <div class="content">
     <p class="category">{{ product.category }}</p>
     <h3>{{ product.name }}</h3>
-    <p class="description">Premium everyday essentials with a clean, modern finish.</p>
+    <p class="description">{{ product.description }}</p>
+    <p class="stock">{{ product.availability || 'In Stock' }}</p>
+    <div class="pricing">
+      @if (product.compareAtLkr && product.compareAtLkr > product.priceLkr) {
+        <strong>{{ product.priceLkr | currency:'LKR':'symbol':'1.0-0' }}</strong>
+        <span class="compare">{{ product.compareAtLkr | currency:'LKR':'symbol':'1.0-0' }}</span>
+        <span class="savings">Save {{ product.compareAtLkr - product.priceLkr | currency:'LKR':'symbol':'1.0-0' }}</span>
+      } @else {
+        <strong>{{ product.priceLkr | currency:'LKR':'symbol':'1.0-0' }}</strong>
+      }
+    </div>
     <div class="row">
-      <strong>{{ product.price | currency }}</strong>
+      <a [routerLink]="['/product', product.slug]" class="details-link">View details</a>
       <button type="button">Add to cart</button>
     </div>
   </div>

@@ -1,14 +1,20 @@
 <section class="hero-panel">
   <div class="hero-copy">
-    <p class="eyebrow">Premium ecommerce frontend</p>
-    <h1>Bold storefront design with dark blue, yellow, and white contrast.</h1>
-    <p class="subtext">
-      A polished landing page inspired by modern ecommerce wireframes, built as a fully responsive Angular frontend with clear product hierarchy, trust signals, and conversion-focused sections.
-    </p>
+    <p class="eyebrow">Sky Sat Lanka storefront</p>
+    <h1>{{ slides[currentSlide].title }}</h1>
+    <p class="subtext">{{ slides[currentSlide].description }}</p>
 
     <div class="hero-actions">
-      <button class="primary" type="button">Shop the collection</button>
-      <button class="secondary" type="button">Explore categories</button>
+      <a routerLink="/shop" class="primary">{{ slides[currentSlide].primaryAction }}</a>
+      <a routerLink="/tracking" class="secondary">{{ slides[currentSlide].secondaryAction }}</a>
+    </div>
+
+    <div class="hero-controls" aria-label="Slide controls">
+      <button type="button" (click)="previousSlide()">Previous</button>
+      @for (slide of slides; track slide.title; let index = $index) {
+        <button type="button" [class.active]="index === currentSlide" (click)="selectSlide(index)"></button>
+      }
+      <button type="button" (click)="nextSlide()">Next</button>
     </div>
 
     <ul class="stats" aria-label="Store highlights">
@@ -23,58 +29,67 @@
 
   <div class="hero-card">
     <div class="hero-card__top">
-      <span class="pill">Editor's pick</span>
-      <span class="price-tag">From $24</span>
+      <span class="pill">{{ slides[currentSlide].kicker }}</span>
+      <span class="price-tag">Live data: {{ backendUrl }}</span>
     </div>
     <div class="hero-visual">
-      <img
-        src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80"
-        alt="Featured lifestyle products"
-      />
+      <img [src]="slides[currentSlide].image" [alt]="slides[currentSlide].title" />
     </div>
     <div class="hero-card__bottom">
-      <h2>Curated drops with clean navigation and premium presentation.</h2>
-      <p>Product storytelling, sharp visuals, and a checkout-ready layout.</p>
+      <h2>Flash-sale ready product discovery for satellite TV customers.</h2>
+      <p>Clear sections, direct calls to action, and a sales-first layout for the store launch.</p>
     </div>
   </div>
 </section>
 
-<section class="section-slab">
+<section class="section-slab" id="categories">
   <div class="section-heading">
-    <p class="eyebrow">Category overview</p>
-    <h2>Built to surface the right shopping path fast.</h2>
+    <div>
+      <p class="eyebrow">Featured categories</p>
+      <h2>Move quickly into the parts customers ask for most.</h2>
+    </div>
+    <a routerLink="/shop" class="ghost-btn">Browse the full catalogue</a>
   </div>
 
   <div class="category-grid">
-    @for (category of categories; track category.name) {
+    @for (category of categories; track category.slug) {
       <article class="category-card">
-        <span class="category-card__mark"></span>
-        <h3>{{ category.name }}</h3>
+        <span class="category-card__mark">{{ category.icon }}</span>
+        <h3>{{ category.title }}</h3>
         <p>{{ category.description }}</p>
       </article>
     }
   </div>
 </section>
 
-<section class="section-slab section-slab--split">
-  <div>
-    <p class="eyebrow">Store benefits</p>
-    <h2>Every section designed to feel intentional.</h2>
+<section class="section-slab" id="deals">
+  <div class="section-header">
+    <div>
+      <p class="eyebrow">Promotional deals</p>
+      <h2>Time-bound sales for current campaign pricing.</h2>
+    </div>
+    <a routerLink="/shop" class="ghost-btn">See all sale items</a>
   </div>
 
-  <ul class="benefit-list">
-    @for (benefit of benefits; track benefit) {
-      <li>{{ benefit }}</li>
+  <div class="deal-grid">
+    @for (deal of deals; track deal.productSlug) {
+      <article class="deal-card">
+        <p class="deal-card__tag">Flash sale</p>
+        <h3>{{ deal.title }}</h3>
+        <p>{{ deal.note }}</p>
+        <strong>{{ deal.countdown }}</strong>
+        <a [routerLink]="['/product', deal.productSlug]">View deal</a>
+      </article>
     }
-  </ul>
+  </div>
 </section>
 
-<section class="section-header">
+<section class="section-header" id="featured">
   <div>
     <p class="eyebrow">Featured products</p>
-    <h2>High-contrast product cards with strong call-to-action.</h2>
+    <h2>Best-selling satellite products pulled from the shared demo catalog.</h2>
   </div>
-  <button type="button" class="ghost-btn">View all products</button>
+  <a routerLink="/cart" class="ghost-btn">Open cart</a>
 </section>
 
 <section class="grid">

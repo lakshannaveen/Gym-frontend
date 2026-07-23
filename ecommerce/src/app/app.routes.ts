@@ -18,6 +18,11 @@ export const routes: Routes = [
 	},
 	{
 		path: 'product',
+		redirectTo: 'product/hd-duo-receiver-4k',
+		pathMatch: 'full',
+	},
+	{
+		path: 'product/:slug',
 		component: ProductPageComponent,
 	},
 	{

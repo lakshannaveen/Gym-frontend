@@ -1,22 +1,27 @@
 <header class="topbar">
   <div class="brand">
-    <span class="dot"></span>
+    <span class="logo-mark">Sky Sat</span>
     <div>
       <span class="eyebrow">Sky Sat Lanka</span>
-      <span class="name">SATELLITE TV SUPPLIER</span>
+      <span class="name">Satellite TV and accessories</span>
     </div>
   </div>
+
+  <label class="searchbar" aria-label="Search products">
+    <span>Search</span>
+    <input type="search" placeholder="Receivers, dishes, cables..." />
+  </label>
 
   <nav class="links" aria-label="Primary">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
     <a routerLink="/shop" routerLinkActive="active">Shop</a>
-    <a routerLink="/product" routerLinkActive="active">Product</a>
+    <a routerLink="/" fragment="categories">Categories</a>
+    <a routerLink="/" fragment="deals">Deals</a>
     <a routerLink="/tracking" routerLinkActive="active">Track Order</a>
-    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
   </nav>
 
   <div class="actions">
-    <button class="cart" type="button">Cart (2)</button>
-    <a class="auth-link" routerLink="/auth" routerLinkActive="active">Sign In</a>
+    <a class="cart" routerLink="/cart" routerLinkActive="active">Cart <span>3</span></a>
+    <a class="auth-link" routerLink="/auth" routerLinkActive="active">Login / Register</a>
   </div>
 </header>

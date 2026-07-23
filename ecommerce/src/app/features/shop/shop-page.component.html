@@ -1,25 +1,61 @@
 <section class="page-hero">
   <p class="eyebrow">Sky Sat Lanka catalogue</p>
-  <h1>Shop satellite TV products and installation services.</h1>
+  <h1>Browse satellite TV products with filters, pricing, and stock info.</h1>
   <p>
-    A client-ready product page for receivers, dishes, accessories, and service packages designed in the requested white, dark blue, and yellow system.
+    The shop page shows all demo products with sale pricing, stock availability, and pagination for a realistic catalogue flow.
   </p>
 </section>
 
-<section class="filter-row">
-  @for (filter of filters; track filter) {
-    <button type="button">{{ filter }}</button>
-  }
-</section>
+<section class="shop-layout">
+  <aside class="sidebar">
+    <div class="sidebar-block">
+      <p class="sidebar-label">Category</p>
+      <button type="button" [class.active]="selectedCategory === 'all'" (click)="setCategory('all')">All products</button>
+      @for (category of categories; track category.slug) {
+        <button
+          type="button"
+          [class.active]="selectedCategory === category.slug"
+          (click)="setCategory(category.slug)"
+        >
+          {{ category.title }}
+        </button>
+      }
+    </div>
 
-<section class="product-grid">
-  @for (product of products; track product.name) {
-    <article class="product-tile">
-      <span class="tag">Featured</span>
-      <h2>{{ product.name }}</h2>
-      <p>{{ product.note }}</p>
-      <strong>{{ product.price }}</strong>
-      <button type="button">Add to cart</button>
-    </article>
-  }
+    <div class="sidebar-block">
+      <p class="sidebar-label">Promotional deals</p>
+      <button type="button" [class.active]="selectedDeal === 'all'" (click)="setDeal('all')">All items</button>
+      <button type="button" [class.active]="selectedDeal === 'sale'" (click)="setDeal('sale')">On sale</button>
+      <button type="button" [class.active]="selectedDeal === 'flash sale'" (click)="setDeal('flash sale')">Flash sale</button>
+    </div>
+
+    <div class="sidebar-block">
+      <p class="sidebar-label">Sort by</p>
+      <select [ngModel]="sortBy" (ngModelChange)="setSort($event)">
+        <option value="featured">Featured</option>
+        <option value="price-asc">Price: low to high</option>
+        <option value="price-desc">Price: high to low</option>
+        <option value="newest">Newest</option>
+      </select>
+    </div>
+  </aside>
+
+  <section class="catalogue">
+    <div class="catalogue-topbar">
+      <p>{{ filteredCount }} products found</p>
+      <a routerLink="/cart" class="cart-link">Open cart</a>
+    </div>
+
+    <div class="product-grid">
+      @for (product of visibleProducts; track product.slug) {
+        <app-product-card [product]="product"></app-product-card>
+      }
+    </div>
+
+    <div class="pagination">
+      <button type="button" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{ currentPage }} of {{ pageCount }}</span>
+      <button type="button" (click)="nextPage()" [disabled]="currentPage === pageCount">Next</button>
+    </div>
+  </section>
 </section>
