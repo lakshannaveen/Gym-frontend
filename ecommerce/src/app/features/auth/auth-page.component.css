@@ -183,6 +183,14 @@ input.ng-invalid.ng-touched:focus {
   box-shadow: 0 0 0 4px rgba(198, 40, 40, 0.1);
 }
 
+input::placeholder {
+  color: #9aa8b9;
+  font-weight: 400;
+  font-size: 0.9rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
 .error {
   color: var(--error);
   font-weight: 400;
@@ -349,6 +357,10 @@ input.ng-invalid.ng-touched:focus {
     padding: 0.6rem 0.8rem;
     font-size: 0.8rem;
   }
+
+  input::placeholder {
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 380px) {
@@ -372,5 +384,9 @@ input.ng-invalid.ng-touched:focus {
   input[type="tel"] {
     padding: 0.7rem 0.8rem;
     font-size: 0.85rem;
+  }
+
+  input::placeholder {
+    font-size: 0.75rem;
   }
 }

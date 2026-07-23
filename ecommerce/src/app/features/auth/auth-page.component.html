@@ -45,14 +45,14 @@
     <form *ngIf="activeTab === 'signin'" [formGroup]="signInForm" (ngSubmit)="onSignIn()" class="form-grid">
       <label>
         Email address
-        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <input type="email" formControlName="email" placeholder="Enter email address" />
         <small class="error" *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
           Please enter a valid email.
         </small>
       </label>
       <label>
         Password
-        <input type="password" formControlName="password" placeholder="••••••••" />
+        <input type="password" formControlName="password" placeholder="Enter password" />
         <small class="error" *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched">
           Password is required.
         </small>
@@ -69,14 +69,14 @@
       <div class="field-row">
         <label>
           First name
-          <input type="text" formControlName="firstName" placeholder="Kasun" />
+          <input type="text" formControlName="firstName" placeholder="Enter first name" />
           <small class="error" *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
             First name is required.
           </small>
         </label>
         <label>
           Last name
-          <input type="text" formControlName="lastName" placeholder="Perera" />
+          <input type="text" formControlName="lastName" placeholder="Enter last name" />
           <small class="error" *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
             Last name is required.
           </small>
@@ -84,21 +84,21 @@
       </div>
       <label>
         Email address
-        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <input type="email" formControlName="email" placeholder="Enter email address" />
         <small class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
           Please enter a valid email.
         </small>
       </label>
       <label>
         Password
-        <input type="password" formControlName="password" placeholder="••••••••" />
+        <input type="password" formControlName="password" placeholder="Enter password" />
         <small class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
           Password must be at least 6 characters.
         </small>
       </label>
       <label>
         Confirm password
-        <input type="password" formControlName="confirmPassword" placeholder="••••••••" />
+        <input type="password" formControlName="confirmPassword" placeholder="Confirm password" />
         <small class="error" *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('confirmPassword')?.touched">
           Passwords do not match.
         </small>
@@ -108,7 +108,7 @@
       </label>
       <label>
         Phone number
-        <input type="tel" formControlName="phone" placeholder="0774235919" />
+        <input type="tel" formControlName="phone" placeholder="Enter phone number (e.g., 0774235919)" />
         <small class="error" *ngIf="registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched">
           Please enter a valid Sri Lankan phone number (e.g., 0774235919).
         </small>
