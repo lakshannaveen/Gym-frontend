@@ -1,71 +1,20 @@
 <section class="shop-shell">
   <div class="catalogue-toolbar">
-    <div class="toolbar-copy">
-      <p class="eyebrow">Product catalogue</p>
-      <h1>Find the right satellite equipment.</h1>
-      <p>{{ filteredCount }} products available</p>
-    </div>
-
+    <div class="toolbar-copy"><p class="eyebrow">Product catalogue</p><h1>Find the right satellite equipment.</h1><p>{{ filteredCount }} products available</p></div>
     <button type="button" class="clear-button" (click)="clearFilters()" [disabled]="!hasActiveFilters">Clear filters</button>
   </div>
 
   <div class="filter-bar" aria-label="Catalogue filters">
-    <label>
-      <span>Category</span>
-      <select [(ngModel)]="selectedCategory" (ngModelChange)="setCategory($event)">
-        <option value="all">All categories</option>
-        @for (category of categories; track category.slug) {
-          <option [value]="category.slug">{{ category.title }}</option>
-        }
-      </select>
-    </label>
-
-    <label>
-      <span>Offer</span>
-      <select [(ngModel)]="selectedDeal" (ngModelChange)="setDeal($event)">
-        <option value="all">All offers</option>
-        <option value="sale">On sale</option>
-        <option value="flash sale">Flash deals</option>
-      </select>
-    </label>
-
-    <label>
-      <span>Availability</span>
-      <select [(ngModel)]="selectedAvailability" (ngModelChange)="setAvailability($event)">
-        <option value="all">All stock levels</option>
-        <option value="in-stock">In stock</option>
-        <option value="low-stock">Low stock</option>
-      </select>
-    </label>
-
-    <label>
-      <span>Sort by</span>
-      <select [(ngModel)]="sortBy" (ngModelChange)="setSort($event)">
-        <option value="featured">Featured</option>
-        <option value="price-asc">Price: low to high</option>
-        <option value="price-desc">Price: high to low</option>
-        <option value="newest">Newest arrivals</option>
-      </select>
-    </label>
+    <div class="filter-dropdown"><span>Category</span><button type="button" (click)="toggleDropdown('category')">{{ selectedCategoryLabel }} <b>⌄</b></button>@if (activeDropdown === 'category') { <div class="dropdown-menu"><button type="button" (click)="setCategory('all')">All categories</button>@for (category of categories; track category.slug) { <button type="button" (click)="setCategory(category.slug)">{{ category.title }}</button> }</div> }</div>
+    <div class="filter-dropdown"><span>Offer</span><button type="button" (click)="toggleDropdown('deal')">{{ selectedDealLabel }} <b>⌄</b></button>@if (activeDropdown === 'deal') { <div class="dropdown-menu"><button type="button" (click)="setDeal('all')">All offers</button><button type="button" (click)="setDeal('sale')">On sale</button><button type="button" (click)="setDeal('flash sale')">Flash deals</button></div> }</div>
+    <div class="filter-dropdown"><span>Availability</span><button type="button" (click)="toggleDropdown('availability')">{{ selectedAvailabilityLabel }} <b>⌄</b></button>@if (activeDropdown === 'availability') { <div class="dropdown-menu"><button type="button" (click)="setAvailability('all')">All stock levels</button><button type="button" (click)="setAvailability('in-stock')">In stock</button><button type="button" (click)="setAvailability('low-stock')">Low stock</button></div> }</div>
+    <div class="filter-dropdown"><span>Sort by</span><button type="button" (click)="toggleDropdown('sort')">{{ selectedSortLabel }} <b>⌄</b></button>@if (activeDropdown === 'sort') { <div class="dropdown-menu"><button type="button" (click)="setSort('featured')">Featured</button><button type="button" (click)="setSort('price-asc')">Price: low to high</button><button type="button" (click)="setSort('price-desc')">Price: high to low</button><button type="button" (click)="setSort('newest')">Newest arrivals</button></div> }</div>
   </div>
 
   @if (visibleProducts.length) {
-    <div class="product-grid">
-      @for (product of visibleProducts; track product.slug) {
-        <app-product-card [product]="product"></app-product-card>
-      }
-    </div>
-
-    <div class="pagination" aria-label="Catalogue pages">
-      <button type="button" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
-      <span>Page {{ currentPage }} of {{ pageCount }}</span>
-      <button type="button" (click)="nextPage()" [disabled]="currentPage === pageCount">Next</button>
-    </div>
+    <div class="product-grid">@for (product of visibleProducts; track product.slug) { <app-product-card [product]="product"></app-product-card> }</div>
+    <div class="pagination" aria-label="Catalogue pages"><button type="button" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button><span>Page {{ currentPage }} of {{ pageCount }}</span><button type="button" (click)="nextPage()" [disabled]="currentPage === pageCount">Next</button></div>
   } @else {
-    <div class="empty-state">
-      <h2>No products match these filters.</h2>
-      <p>Try selecting a different category or offer.</p>
-      <button type="button" (click)="clearFilters()">Show all products</button>
-    </div>
+    <div class="empty-state"><h2>No products match these filters.</h2><p>Try selecting a different category or offer.</p><button type="button" (click)="clearFilters()">Show all products</button></div>
   }
 </section>

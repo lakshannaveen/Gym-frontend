@@ -22,7 +22,7 @@
     </div>
     <div class="row">
       <a [routerLink]="['/product', product.slug]" class="details-link">View details</a>
-      <button type="button">Add to cart</button>
+      <button type="button" (click)="addToCart()">Add to cart</button>
     </div>
   </div>
 </article>

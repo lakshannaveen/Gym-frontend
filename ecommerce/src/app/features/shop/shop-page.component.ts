@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SHOP_PRODUCTS, STORE_CATEGORIES } from '../../shared/data/products.data';
 import { ProductCardComponent } from '../products/product-card.component';
@@ -8,7 +6,7 @@ import { ProductCardComponent } from '../products/product-card.component';
 @Component({
   selector: 'app-shop-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, ProductCardComponent],
+  imports: [ProductCardComponent],
   templateUrl: './shop-page.component.html',
   styleUrls: ['./shop-page.component.css'],
 })
@@ -21,6 +19,7 @@ export class ShopPageComponent {
   protected sortBy = 'featured';
   protected currentPage = 1;
   protected readonly pageSize = 6;
+  protected activeDropdown: 'category' | 'deal' | 'availability' | 'sort' | null = null;
 
   constructor(route: ActivatedRoute) {
     const category = route.snapshot.queryParamMap.get('category');
@@ -73,24 +72,39 @@ export class ShopPageComponent {
     return this.selectedCategory !== 'all' || this.selectedDeal !== 'all' || this.selectedAvailability !== 'all' || this.sortBy !== 'featured';
   }
 
+  get selectedCategoryLabel() { return this.categories.find((category) => category.slug === this.selectedCategory)?.title || 'All categories'; }
+  get selectedDealLabel() { return { all: 'All offers', sale: 'On sale', 'flash sale': 'Flash deals' }[this.selectedDeal] || 'All offers'; }
+  get selectedAvailabilityLabel() { return { all: 'All stock levels', 'in-stock': 'In stock', 'low-stock': 'Low stock' }[this.selectedAvailability] || 'All stock levels'; }
+  get selectedSortLabel() { return { featured: 'Featured', 'price-asc': 'Price: low to high', 'price-desc': 'Price: high to low', newest: 'Newest arrivals' }[this.sortBy] || 'Featured'; }
+
+  toggleDropdown(dropdown: 'category' | 'deal' | 'availability' | 'sort'): void {
+    this.activeDropdown = this.activeDropdown === dropdown ? null : dropdown;
+  }
+
+  closeDropdown(): void { this.activeDropdown = null; }
+
   setCategory(category: string): void {
     this.selectedCategory = category;
     this.currentPage = 1;
+    this.closeDropdown();
   }
 
   setDeal(deal: string): void {
     this.selectedDeal = deal;
     this.currentPage = 1;
+    this.closeDropdown();
   }
 
   setAvailability(availability: string): void {
     this.selectedAvailability = availability;
     this.currentPage = 1;
+    this.closeDropdown();
   }
 
   setSort(sortBy: string): void {
     this.sortBy = sortBy;
     this.currentPage = 1;
+    this.closeDropdown();
   }
 
   clearFilters(): void {

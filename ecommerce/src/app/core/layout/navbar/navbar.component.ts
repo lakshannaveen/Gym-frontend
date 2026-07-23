@@ -1,7 +1,8 @@
 // navbar.component.ts
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CartService } from '../../../shared/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
+  protected readonly cart = inject(CartService);
   isScrolled = false;
   isMobileMenuOpen = false;
 
@@ -25,5 +27,10 @@ export class NavbarComponent {
 
   closeMobileMenu() {
     this.isMobileMenuOpen = false;
+  }
+
+  openCart(): void {
+    this.closeMobileMenu();
+    this.cart.open();
   }
 }

@@ -1,3 +1,6 @@
+@if (orderPlaced) {
+  <section class="order-success"><p class="eyebrow">Order received</p><h1>Thank you — your order is being processed.</h1><p>We will contact you shortly to confirm delivery and installation details.</p></section>
+} @else {
 <section class="checkout-layout">
   <div class="checkout-form">
     <p class="eyebrow">Secure checkout</p>
@@ -8,13 +11,19 @@
       <input type="tel" placeholder="Phone number" />
       <input type="email" placeholder="Email address" />
     </div>
-    <button type="button" class="primary">Place order</button>
+    <button type="button" class="primary" (click)="placeOrder()" [disabled]="!cart.items().length">Place order</button>
   </div>
 
   <aside class="checkout-summary">
     <h2>Order summary</h2>
-    <p>Receiver package</p>
-    <strong>LKR 24,900</strong>
+    @if (cart.items().length) {
+      @for (item of cart.items(); track item.product.id) { <p>{{ item.product.name }} × {{ item.quantity }}</p> }
+      <strong>{{ cart.totalLkr() | currency:'LKR':'symbol':'1.0-0' }}</strong>
+    } @else {
+      <p>Your cart is currently empty.</p>
+      <strong>LKR 0</strong>
+    }
     <p>Delivery and installation calculated at confirmation.</p>
   </aside>
 </section>
+}

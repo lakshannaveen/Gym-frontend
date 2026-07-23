@@ -1,7 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Product } from '../../shared/models/product.model';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -12,4 +13,7 @@ import { Product } from '../../shared/models/product.model';
 })
 export class ProductCardComponent {
   @Input({ required: true }) product!: Product;
+  private readonly cart = inject(CartService);
+
+  addToCart(): void { this.cart.add(this.product); }
 }

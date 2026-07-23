@@ -10,10 +10,12 @@ h1 { font-size: clamp(1.7rem, 3.2vw, 2.5rem); line-height: 1.05; }
 .clear-button:disabled, .pagination button:disabled { cursor: not-allowed; opacity: 0.45; }
 
 .filter-bar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.75rem; padding: 1rem; border-radius: 20px; background: linear-gradient(100deg, rgba(18, 58, 103, 0.08), rgba(245, 197, 66, 0.14)); border: 1px solid var(--line); }
-.filter-bar label { display: grid; gap: 0.4rem; min-width: 0; }
-.filter-bar span { color: var(--ink-soft); font-size: 0.78rem; font-weight: 800; }
-.filter-bar select { width: 100%; appearance: auto; border: 1px solid var(--line); border-radius: 12px; padding: 0.72rem 0.75rem; background: var(--surface); color: var(--accent-strong); font-weight: 700; cursor: pointer; }
-.filter-bar select:focus { outline: 3px solid rgba(245, 197, 66, 0.38); border-color: var(--brand-strong); }
+.filter-dropdown { position: relative; display: grid; gap: 0.4rem; min-width: 0; }
+.filter-dropdown > span { color: var(--ink-soft); font-size: 0.78rem; font-weight: 800; }
+.filter-dropdown > button { width: 100%; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 0.72rem 0.75rem; background: var(--surface); color: var(--accent-strong); font-weight: 700; cursor: pointer; text-align: left; }
+.filter-dropdown > button:hover { border-color: var(--brand-strong); }.filter-dropdown b { color: var(--brand-strong); font-size: 1.05rem; }
+.dropdown-menu { position: absolute; z-index: 4; top: calc(100% + .35rem); left: 0; right: 0; display: grid; padding: .35rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); }
+.dropdown-menu button { border: 0; border-radius: 9px; padding: .65rem .7rem; background: transparent; color: var(--ink-soft); text-align: left; font-weight: 700; cursor: pointer; }.dropdown-menu button:hover { background: rgba(245, 197, 66, .18); color: var(--accent-strong); }
 
 .product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
 .pagination { display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-top: 1.25rem; }

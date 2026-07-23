@@ -42,6 +42,9 @@ input,
   border: 1px solid rgba(18, 58, 103, 0.18);
   padding: 0.95rem;
 }
+.primary:disabled { cursor: not-allowed; opacity: .5; }
+.order-success { border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); border-radius: 26px; padding: 2rem; text-align: center; }
+.order-success h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); }.order-success p:last-child { color: var(--muted); }
 
 .primary {
   border: 0;
