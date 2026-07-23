@@ -1,9 +1,10 @@
 import { CurrencyPipe } from '@angular/common';
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { BACKEND_URL } from '../../shared/config/backend-url';
 import { CATEGORY_PROMOTIONS, FEATURED_PRODUCTS, FLASH_DEALS, HERO_SLIDES, STORE_CATEGORIES, STORE_STATS } from '../../shared/data/products.data';
 import { ProductCardComponent } from '../products/product-card.component';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-home-page',
@@ -25,6 +26,7 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   protected couponMessage = '';
   private timerId?: ReturnType<typeof setInterval>;
   private revealObserver?: IntersectionObserver;
+  private readonly cart = inject(CartService);
 
   constructor(private readonly router: Router) {}
 
@@ -75,4 +77,6 @@ export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
     const id = orderId.trim();
     this.router.navigate(['/tracking'], { queryParams: id ? { order: id } : {} });
   }
+
+  openCart(): void { this.cart.open(); }
 }

@@ -75,7 +75,7 @@
   <div class="category-grid">
     @for (category of categories; track category.slug) {
       <article class="category-card reveal" [class.reveal-left]="$even" [class.reveal-right]="$odd">
-        <span class="category-card__mark">{{ category.icon }}</span>
+        <div class="category-card__image"><img [src]="category.image" [alt]="category.title" loading="lazy" /></div>
         <h3>{{ category.title }}</h3>
         <p>{{ category.description }}</p>
         <a [routerLink]="['/shop']" [queryParams]="{ category: category.slug }">Shop category</a>
@@ -110,7 +110,8 @@
         <p class="deal-card__tag">Flash sale</p>
         <h3>{{ deal.title }}</h3>
         <p>{{ deal.note }}</p>
-        <strong class="countdown">{{ countdownFor(deal.durationSeconds) }}</strong>
+        <p class="countdown-label">Deal ends in</p>
+        <strong class="countdown" aria-live="polite">{{ countdownFor(deal.durationSeconds) }}</strong>
         <a [routerLink]="['/product', deal.productSlug]">View deal</a>
       </article>
     }
@@ -122,7 +123,7 @@
     <p class="eyebrow">Featured products</p>
     <h2>Best-selling satellite products pulled from the shared demo catalog.</h2>
   </div>
-  <a routerLink="/cart" class="ghost-btn">Open cart</a>
+  <button type="button" class="ghost-btn" (click)="openCart()">Open cart</button>
 </section>
 
 <section class="grid">

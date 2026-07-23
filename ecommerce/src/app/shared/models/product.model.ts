@@ -21,6 +21,7 @@ export interface StoreCategory {
   slug: string;
   icon: string;
   description: string;
+  image: string;
 }
 
 export interface HeroSlide {

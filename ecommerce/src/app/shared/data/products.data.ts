@@ -55,24 +55,28 @@ export const STORE_CATEGORIES: StoreCategory[] = [
     slug: 'dishes',
     icon: '◐',
     description: 'Outdoor kits, brackets, and weather-ready mounting hardware.',
+    image: 'https://images.unsplash.com/photo-1612810806546-ebbf22b9f0e2?auto=format&fit=crop&w=900&q=80',
   },
   {
     title: 'Receivers / Decoders',
     slug: 'receivers',
     icon: '▣',
     description: 'HD and 4K set-top boxes for everyday viewing and premium packs.',
+    image: 'https://images.unsplash.com/photo-1516910817561-3e43f9f4c0d0?auto=format&fit=crop&w=900&q=80',
   },
   {
     title: 'Cables & LNBs',
     slug: 'cables-lnbs',
     icon: '⎍',
     description: 'Signal-critical accessories, splitters, connectors, and LNB units.',
+    image: 'https://images.unsplash.com/photo-1581092918367-97f9a34d36d7?auto=format&fit=crop&w=900&q=80',
   },
   {
     title: 'Accessories',
     slug: 'accessories',
     icon: '✦',
     description: 'Remote controls, cable ties, clamps, and practical add-ons.',
+    image: 'https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=900&q=80',
   },
 ];
 
