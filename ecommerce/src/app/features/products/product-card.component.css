@@ -7,11 +7,15 @@
   transform: translateY(12px);
   opacity: 0;
   animation: rise 0.55s ease forwards;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .media {
   position: relative;
-  height: 240px;
+  height: 220px;
+  flex: 0 0 220px;
 }
 
 .media img {
@@ -34,6 +38,9 @@
 
 .content {
   padding: 1rem 1rem 1.1rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 
 .category {
@@ -51,6 +58,7 @@ h3 {
   margin: 0.3rem 0 0.65rem;
   color: var(--muted);
   line-height: 1.55;
+  min-height: 4.8rem;
 }
 
 .stock {
@@ -58,6 +66,7 @@ h3 {
   color: #1c6a3c;
   font-size: 0.85rem;
   font-weight: 700;
+  min-height: 1.3rem;
 }
 
 .pricing {
@@ -66,6 +75,7 @@ h3 {
   gap: 0.55rem;
   align-items: center;
   margin-bottom: 0.9rem;
+  min-height: 2.25rem;
 }
 
 .row {
@@ -73,6 +83,7 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+  margin-top: auto;
 }
 
 strong {
@@ -107,6 +118,12 @@ button {
   cursor: pointer;
   font-weight: 700;
   text-decoration: none;
+  min-height: 2.7rem;
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .details-link {

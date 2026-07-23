@@ -3,7 +3,7 @@
   <aside class="cart-drawer" aria-label="Shopping cart" role="dialog" aria-modal="true">
     <header>
       <div><p>Your cart</p><span>{{ cart.itemCount() }} item{{ cart.itemCount() === 1 ? '' : 's' }}</span></div>
-      <button type="button" class="close" (click)="cart.close()" aria-label="Close cart">×</button>
+      <button type="button" class="close" (click)="cart.close()" aria-label="Close cart">Close</button>
     </header>
 
     @if (cart.items().length) {
@@ -15,7 +15,7 @@
               <h2>{{ item.product.name }}</h2>
               <strong>{{ item.product.priceLkr | currency:'LKR':'symbol':'1.0-0' }}</strong>
               <div class="quantity">
-                <button type="button" (click)="cart.updateQuantity(item.product.id, item.quantity - 1)">−</button>
+                <button type="button" (click)="cart.updateQuantity(item.product.id, item.quantity - 1)">&minus;</button>
                 <span>{{ item.quantity }}</span>
                 <button type="button" (click)="cart.updateQuantity(item.product.id, item.quantity + 1)">+</button>
                 <button type="button" class="remove" (click)="cart.remove(item.product.id)">Remove</button>

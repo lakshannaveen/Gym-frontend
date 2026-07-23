@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SHOP_PRODUCTS, STORE_CATEGORIES } from '../../shared/data/products.data';
 import { ProductCardComponent } from '../products/product-card.component';
@@ -10,7 +10,7 @@ import { ProductCardComponent } from '../products/product-card.component';
   templateUrl: './shop-page.component.html',
   styleUrls: ['./shop-page.component.css'],
 })
-export class ShopPageComponent {
+export class ShopPageComponent implements AfterViewInit, OnDestroy {
   protected readonly categories = STORE_CATEGORIES;
   protected readonly products = SHOP_PRODUCTS;
   protected selectedCategory = 'all';
@@ -20,10 +20,36 @@ export class ShopPageComponent {
   protected currentPage = 1;
   protected readonly pageSize = 6;
   protected activeDropdown: 'category' | 'deal' | 'availability' | 'sort' | null = null;
+  @ViewChildren(ProductCardComponent, { read: ElementRef }) private productCards!: QueryList<ElementRef<HTMLElement>>;
+  private revealObserver?: IntersectionObserver;
 
   constructor(route: ActivatedRoute) {
     const category = route.snapshot.queryParamMap.get('category');
     if (category && STORE_CATEGORIES.some((item) => item.slug === category)) this.selectedCategory = category;
+  }
+
+  ngAfterViewInit(): void {
+    if (!('IntersectionObserver' in window)) return;
+    this.revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          this.revealObserver?.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    this.observeCards();
+    this.productCards.changes.subscribe(() => this.observeCards());
+  }
+
+  ngOnDestroy(): void { this.revealObserver?.disconnect(); }
+
+  private observeCards(): void {
+    this.productCards.forEach((card, index) => {
+      const element = card.nativeElement;
+      element.classList.add('reveal', index % 2 ? 'reveal-right' : 'reveal-left');
+      this.revealObserver?.observe(element);
+    });
   }
 
   get visibleProducts() {
