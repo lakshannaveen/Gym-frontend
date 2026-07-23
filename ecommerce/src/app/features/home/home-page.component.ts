@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { BACKEND_URL } from '../../shared/config/backend-url';
 import { CATEGORY_PROMOTIONS, FEATURED_PRODUCTS, FLASH_DEALS, HERO_SLIDES, STORE_CATEGORIES, STORE_STATS } from '../../shared/data/products.data';
@@ -12,7 +12,7 @@ import { ProductCardComponent } from '../products/product-card.component';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
 })
-export class HomePageComponent implements OnInit, OnDestroy {
+export class HomePageComponent implements OnInit, AfterViewInit, OnDestroy {
   protected readonly backendUrl = BACKEND_URL;
   protected readonly stats = STORE_STATS;
   protected readonly categories = STORE_CATEGORIES;
@@ -24,12 +24,26 @@ export class HomePageComponent implements OnInit, OnDestroy {
   protected secondsElapsed = 0;
   protected couponMessage = '';
   private timerId?: ReturnType<typeof setInterval>;
+  private revealObserver?: IntersectionObserver;
 
   constructor(private readonly router: Router) {}
 
   ngOnInit(): void { this.timerId = setInterval(() => this.secondsElapsed++, 1000); }
 
-  ngOnDestroy(): void { if (this.timerId) clearInterval(this.timerId); }
+  ngAfterViewInit(): void {
+    if (!('IntersectionObserver' in window)) return;
+    this.revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          this.revealObserver?.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach((element) => this.revealObserver?.observe(element));
+  }
+
+  ngOnDestroy(): void { if (this.timerId) clearInterval(this.timerId); this.revealObserver?.disconnect(); }
 
   selectSlide(index: number): void {
     this.currentSlide = index;

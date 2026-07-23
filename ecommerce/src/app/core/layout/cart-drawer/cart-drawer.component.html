@@ -30,7 +30,7 @@
         <button type="button" class="continue" (click)="cart.close()">Continue shopping</button>
       </footer>
     } @else {
-      <div class="empty"><h2>Your cart is empty.</h2><p>Add a product to begin your order.</p><button type="button" (click)="cart.close()">Browse products</button></div>
+      <div class="empty"><h2>Your cart is empty.</h2><p>Add a product to begin your order.</p><a routerLink="/shop" (click)="cart.close()">Browse products</a></div>
     }
   </aside>
 }

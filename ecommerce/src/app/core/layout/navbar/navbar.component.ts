@@ -12,7 +12,7 @@ import { CartService } from '../../../shared/services/cart.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  protected readonly cart = inject(CartService);
+  public readonly cart = inject(CartService);
   isScrolled = false;
   isMobileMenuOpen = false;
 
@@ -29,7 +29,7 @@ export class NavbarComponent {
     this.isMobileMenuOpen = false;
   }
 
-  openCart(): void {
+  public openCart(): void {
     this.closeMobileMenu();
     this.cart.open();
   }

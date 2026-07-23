@@ -50,7 +50,7 @@
   </div>
 </section>
 
-<section class="promo-strip" aria-label="Active coupon">
+<section class="promo-strip reveal reveal-left" aria-label="Active coupon">
   <div>
     <p class="eyebrow">A little extra for your order</p>
     <h2>Use <span>SKYSAT10</span> for LKR 500 off.</h2>
@@ -63,7 +63,7 @@
   </div>
 </section>
 
-<section class="section-slab" id="categories">
+<section class="section-slab reveal reveal-right" id="categories">
   <div class="section-heading">
     <div>
       <p class="eyebrow">Featured categories</p>
@@ -74,7 +74,7 @@
 
   <div class="category-grid">
     @for (category of categories; track category.slug) {
-      <article class="category-card">
+      <article class="category-card reveal" [class.reveal-left]="$even" [class.reveal-right]="$odd">
         <span class="category-card__mark">{{ category.icon }}</span>
         <h3>{{ category.title }}</h3>
         <p>{{ category.description }}</p>
@@ -86,7 +86,7 @@
 
 <section class="promotion-grid" aria-label="Category promotions">
   @for (promotion of promotions; track promotion.title) {
-    <article class="promotion-card">
+    <article class="promotion-card reveal" [class.reveal-left]="$even" [class.reveal-right]="$odd">
       <p>{{ promotion.discount }}</p>
       <h2>{{ promotion.title }}</h2>
       <span>{{ promotion.detail }}</span>
@@ -95,7 +95,7 @@
   }
 </section>
 
-<section class="section-slab" id="deals">
+<section class="section-slab reveal reveal-left" id="deals">
   <div class="section-header">
     <div>
       <p class="eyebrow">Promotional deals</p>
@@ -106,7 +106,7 @@
 
   <div class="deal-grid">
     @for (deal of deals; track deal.productSlug) {
-      <article class="deal-card">
+      <article class="deal-card reveal" [class.reveal-left]="$even" [class.reveal-right]="$odd">
         <p class="deal-card__tag">Flash sale</p>
         <h3>{{ deal.title }}</h3>
         <p>{{ deal.note }}</p>
@@ -117,7 +117,7 @@
   </div>
 </section>
 
-<section class="section-header" id="featured">
+<section class="section-header reveal reveal-right" id="featured">
   <div>
     <p class="eyebrow">Featured products</p>
     <h2>Best-selling satellite products pulled from the shared demo catalog.</h2>
@@ -127,11 +127,11 @@
 
 <section class="grid">
   @for (product of products; track product.id) {
-    <app-product-card [product]="product"></app-product-card>
+    <app-product-card class="reveal" [class.reveal-left]="$even" [class.reveal-right]="$odd" [product]="product"></app-product-card>
   }
 </section>
 
-<section class="tracking-portal">
+<section class="tracking-portal reveal reveal-left">
   <div>
     <p class="eyebrow">Order tracking</p>
     <h2>Already ordered? Check your delivery status.</h2>
@@ -143,7 +143,7 @@
   </div>
 </section>
 
-<section class="trust-row" aria-label="Secure payments">
+<section class="trust-row reveal reveal-right" aria-label="Secure payments">
   <span>Secure checkout</span>
   <span>Local payment gateway</span>
   <span>Islandwide delivery</span>

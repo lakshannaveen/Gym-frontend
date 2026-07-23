@@ -16,9 +16,9 @@ header span { color: var(--muted); font-size: .85rem; }
 footer { border-top: 1px solid var(--line); border-bottom: 0; display: grid; gap: .75rem; }
 .total { display: flex; justify-content: space-between; color: var(--ink-soft); }
 .total strong { color: var(--accent-strong); font-size: 1.2rem; }
-footer a, .continue, .empty button { border: 0; border-radius: 999px; padding: .85rem 1rem; text-align: center; font-weight: 800; text-decoration: none; cursor: pointer; }
+footer a, .continue, .empty button, .empty a { border: 0; border-radius: 999px; padding: .85rem 1rem; text-align: center; font-weight: 800; text-decoration: none; cursor: pointer; }
 footer a { background: var(--accent); color: #fff; }
-.continue, .empty button { background: rgba(18, 58, 103, .08); color: var(--accent-strong); }
+.continue, .empty button, .empty a { background: rgba(18, 58, 103, .08); color: var(--accent-strong); }
 .empty { display: grid; place-content: center; text-align: center; padding: 2rem; }
-.empty h2 { margin: 0; font-family: 'Space Grotesk', sans-serif; }.empty p { color: var(--muted); }.empty button { margin-top: .5rem; }
+.empty h2 { margin: 0; font-family: 'Space Grotesk', sans-serif; }.empty p { color: var(--muted); }.empty button, .empty a { margin-top: .5rem; }
 @keyframes slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
