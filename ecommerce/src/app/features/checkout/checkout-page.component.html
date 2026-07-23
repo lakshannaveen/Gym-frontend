@@ -1,4 +1,3 @@
-<!-- src/app/checkout/checkout-page.component.html -->
 @if (orderPlaced) {
   <section class="order-success">
     <p class="eyebrow">Order received</p>
@@ -11,69 +10,7 @@
       <p class="eyebrow">Secure checkout</p>
       <h1>Complete your order</h1>
       
-      <!-- Test Mode Notice -->
-      <div class="test-mode-notice">
-        🔒 <strong>TEST MODE</strong> - Using PayHere Sandbox
-        <span class="test-badge">Sandbox</span>
-      </div>
-      
       <div class="field-grid">
-        <!-- Customer Information -->
-        <div class="form-row-2">
-          <div class="form-group">
-            <label for="firstName">First Name *</label>
-            <input 
-              id="firstName"
-              type="text" 
-              placeholder="John" 
-              [(ngModel)]="orderDetails.firstName"
-              name="firstName"
-              required />
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input 
-              id="lastName"
-              type="text" 
-              placeholder="Doe" 
-              [(ngModel)]="orderDetails.lastName"
-              name="lastName" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input 
-            id="email"
-            type="email" 
-            placeholder="john@example.com" 
-            [(ngModel)]="orderDetails.email"
-            name="email"
-            required />
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Phone *</label>
-          <input 
-            id="phone"
-            type="tel" 
-            placeholder="0771234567" 
-            [(ngModel)]="orderDetails.phone"
-            name="phone"
-            required />
-        </div>
-
-        <div class="form-group">
-          <label for="address">Address *</label>
-          <input 
-            id="address"
-            type="text" 
-            placeholder="123 Main Street" 
-            [(ngModel)]="orderDetails.address"
-            name="address"
-            required />
-        </div>
-
         <!-- Custom Province Dropdown -->
         <div class="form-group">
           <label for="province">Province *</label>
@@ -130,126 +67,19 @@
                 value="card" 
                 [(ngModel)]="orderDetails.paymentMethod"
                 name="paymentMethod" />
-              <span>Card / Online Payment</span>
+              <span>Card Payment</span>
             </label>
           </div>
         </div>
       </div>
 
-      <!-- Quick Fill Test Data (Remove in production) -->
-      <div class="test-actions">
-        <button type="button" class="test-btn" (click)="fillTestCustomer()">
-          🧪 Fill Test Customer
-        </button>
-      </div>
-
-      <!-- Card Payment Form - Shows only when card payment is selected -->
-      @if (orderDetails.paymentMethod === 'card') {
-        <div class="card-payment-form">
-          <h3>💳 Card Details</h3>
-          <p class="test-mode-notice-sm">
-            🔐 All payments are processed securely through PayHere
-          </p>
-          
-          <div class="field-grid">
-            <div class="form-group">
-              <label for="cardNumber">Card Number *</label>
-              <input 
-                id="cardNumber"
-                type="text" 
-                placeholder="4242 4242 4242 4242" 
-                [(ngModel)]="cardDetails.cardNumber"
-                name="cardNumber"
-                (input)="formatCardNumber($event)"
-                maxlength="19"
-                required />
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="expiryDate">Expiry Date *</label>
-                <input 
-                  id="expiryDate"
-                  type="text" 
-                  placeholder="MM/YY" 
-                  [(ngModel)]="cardDetails.expiryDate"
-                  name="expiryDate"
-                  (input)="formatExpiryDate($event)"
-                  maxlength="5"
-                  required />
-              </div>
-              <div class="form-group">
-                <label for="cvv">CVV *</label>
-                <input 
-                  id="cvv"
-                  type="password" 
-                  placeholder="123" 
-                  [(ngModel)]="cardDetails.cvv"
-                  name="cvv"
-                  maxlength="4"
-                  required />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="cardHolderName">Cardholder Name *</label>
-              <input 
-                id="cardHolderName"
-                type="text" 
-                placeholder="John Doe" 
-                [(ngModel)]="cardDetails.cardHolderName"
-                name="cardHolderName"
-                required />
-            </div>
-          </div>
-
-          <!-- Test Card Quick Fill (Remove in production) -->
-          <div class="test-card-shortcuts">
-            <span class="label">Quick fill test card:</span>
-            <button type="button" class="test-card-btn" (click)="fillTestCard('visa')">💳 Visa</button>
-            <button type="button" class="test-card-btn" (click)="fillTestCard('mastercard')">💳 Master</button>
-            <button type="button" class="test-card-btn" (click)="fillTestCard('amex')">💳 Amex</button>
-          </div>
-
-          <!-- Card Brand Icons -->
-          <div class="card-brands">
-            <span class="card-icon">💳</span>
-            <span class="card-icon">💳</span>
-            <span class="card-icon">💳</span>
-            <span class="payhere-logo">Powered by PayHere</span>
-          </div>
-
-          <button 
-            type="button" 
-            class="primary pay-button" 
-            (click)="processCardPayment()" 
-            [disabled]="!isCardFormValid() || isProcessingPayment || isRedirecting">
-            @if (isProcessingPayment) {
-              <span class="spinner">⌛</span>
-              {{ isProcessingPayment ? 'Redirecting to PayHere...' : '' }}
-            } @else if (isRedirecting) {
-              <span>⏳ Opening Payment Page...</span>
-            } @else {
-              <span>Pay with PayHere - {{ cart.totalLkr() | currency:'LKR':'symbol':'1.0-0' }}</span>
-            }
-          </button>
-          
-          <p class="payment-note">
-            🔒 You will be redirected to PayHere's secure payment page
-          </p>
-        </div>
-      }
-
-      <!-- COD Order Button -->
-      @if (orderDetails.paymentMethod === 'cod') {
-        <button 
-          type="button" 
-          class="primary" 
-          (click)="placeOrder()" 
-          [disabled]="!cart.items().length || !orderDetails.province || !orderDetails.city || !orderDetails.firstName || !orderDetails.email || !orderDetails.phone || !orderDetails.address">
-          Place Order
-        </button>
-      }
+      <button 
+        type="button" 
+        class="primary" 
+        (click)="placeOrder()" 
+        [disabled]="!cart.items().length || !orderDetails.province || !orderDetails.city">
+        Place order
+      </button>
     </div>
 
     <aside class="checkout-summary">
@@ -268,29 +98,4 @@
       }
     </aside>
   </section>
-}
-
-<!-- Payment Success Modal -->
-@if (showPaymentSuccess) {
-  <div class="modal-overlay" (click)="closePaymentSuccess()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <div class="success-icon">✅</div>
-      <h2>Payment Successful!</h2>
-      <p>Your payment has been processed successfully through PayHere.</p>
-      <p class="transaction-id">Transaction ID: {{ transactionId }}</p>
-      <button class="primary" (click)="completeOrder()">Continue</button>
-    </div>
-  </div>
-}
-
-<!-- Redirecting overlay -->
-@if (isRedirecting) {
-  <div class="modal-overlay">
-    <div class="modal-content redirect-content">
-      <div class="spinner-large">⌛</div>
-      <h2>Redirecting to PayHere</h2>
-      <p>Please wait while we redirect you to the secure payment page...</p>
-      <p class="transaction-id">Order ID: {{ transactionId }}</p>
-    </div>
-  </div>
 }
