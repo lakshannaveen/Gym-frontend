@@ -153,6 +153,27 @@ label {
   gap: 0.75rem;
 }
 
+/* ===== Forgot Password ===== */
+.forgot-password-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.5rem;
+}
+
+.forgot-password-link {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.forgot-password-link:hover {
+  color: var(--brand-strong);
+  border-bottom-color: var(--brand);
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -349,6 +370,10 @@ input::placeholder {
   input::placeholder {
     font-size: 0.8rem;
   }
+
+  .forgot-password-row {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 380px) {
@@ -387,5 +412,9 @@ input::placeholder {
   .secondary {
     padding: 0.7rem 1rem;
     font-size: 0.85rem;
+  }
+
+  .forgot-password-link {
+    font-size: 0.7rem;
   }
 }

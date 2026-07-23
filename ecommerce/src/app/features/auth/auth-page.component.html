@@ -60,6 +60,13 @@
         </small>
       </label>
 
+      <!-- Forgot Password Link -->
+      <div class="forgot-password-row">
+        <a href="#" class="forgot-password-link" (click)="onForgotPassword(); $event.preventDefault()">
+          Forgot Password?
+        </a>
+      </div>
+
       <div class="actions">
         <button type="submit" class="primary" [disabled]="signInForm.invalid">Sign In</button>
         <button type="button" class="secondary" (click)="setTab('register')">Create Account</button>

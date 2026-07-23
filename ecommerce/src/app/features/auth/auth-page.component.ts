@@ -84,4 +84,11 @@ export class AuthPageComponent {
       this.registerForm.markAllAsTouched();
     }
   }
+
+  // Forgot password handler
+  onForgotPassword() {
+    // Just a placeholder - no navigation for now
+    console.log('Forgot password clicked');
+    alert('Password reset link will be sent to your email (demo)');
+  }
 }
