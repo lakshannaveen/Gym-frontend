@@ -30,12 +30,21 @@ export interface HeroSlide {
   image: string;
   primaryAction: string;
   secondaryAction: string;
+  priceLkr: number;
+  compareAtLkr?: number;
+}
+
+export interface CategoryPromotion {
+  title: string;
+  detail: string;
+  discount: string;
+  category: string;
 }
 
 export interface FlashDeal {
   title: string;
   productSlug: string;
-  countdown: string;
+  durationSeconds: number;
   note: string;
 }
 

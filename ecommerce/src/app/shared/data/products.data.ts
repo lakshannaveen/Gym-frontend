@@ -3,6 +3,7 @@ import {
   CartItem,
   FlashDeal,
   HeroSlide,
+  CategoryPromotion,
   OrderRecord,
   Product,
   StoreCategory,
@@ -25,6 +26,8 @@ export const HERO_SLIDES: HeroSlide[] = [
       'https://images.unsplash.com/photo-1574850274043-1c5b1f3f5a57?auto=format&fit=crop&w=1400&q=80',
     primaryAction: 'Shop the collection',
     secondaryAction: 'Track an order',
+    priceLkr: 18500,
+    compareAtLkr: 21900,
   },
   {
     title: 'Flash sale pricing on best-selling decoders.',
@@ -35,7 +38,15 @@ export const HERO_SLIDES: HeroSlide[] = [
       'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1400&q=80',
     primaryAction: 'View flash sale',
     secondaryAction: 'Browse receivers',
+    priceLkr: 24900,
+    compareAtLkr: 29900,
   },
+];
+
+export const CATEGORY_PROMOTIONS: CategoryPromotion[] = [
+  { title: 'Receiver upgrade week', detail: 'Save on HD and 4K receivers while stocks last.', discount: '15% OFF receivers', category: 'receivers' },
+  { title: 'Ready-to-install dish kits', detail: 'A complete outdoor setup for new connections.', discount: 'Save LKR 3,400', category: 'dishes' },
+  { title: 'Cabling essentials', detail: 'Reliable signal accessories for every installation.', discount: 'Buy 2, save 10%', category: 'cables-lnbs' },
 ];
 
 export const STORE_CATEGORIES: StoreCategory[] = [
@@ -261,19 +272,19 @@ export const FLASH_DEALS: FlashDeal[] = [
   {
     title: 'HD Duo Receiver 4K',
     productSlug: 'hd-duo-receiver-4k',
-    countdown: '03:12:45',
+    durationSeconds: 11565,
     note: 'Save LKR 5,000 before the flash sale ends.',
   },
   {
     title: 'Outdoor 60cm Dish Kit',
     productSlug: 'outdoor-60cm-dish-kit',
-    countdown: '11:48:20',
+    durationSeconds: 42500,
     note: 'Weather-ready package with installation savings.',
   },
   {
     title: 'Signal Booster Amplifier',
     productSlug: 'signal-booster-amplifier',
-    countdown: '08:05:10',
+    durationSeconds: 29110,
     note: 'Keep multi-room connections steady at a lower price.',
   },
 ];

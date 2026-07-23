@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SHOP_PRODUCTS, STORE_CATEGORIES } from '../../shared/data/products.data';
 import { ProductCardComponent } from '../products/product-card.component';
 
@@ -20,6 +20,11 @@ export class ShopPageComponent {
   protected sortBy = 'featured';
   protected currentPage = 1;
   protected readonly pageSize = 6;
+
+  constructor(route: ActivatedRoute) {
+    const category = route.snapshot.queryParamMap.get('category');
+    if (category && STORE_CATEGORIES.some((item) => item.slug === category)) this.selectedCategory = category;
+  }
 
   get visibleProducts() {
     const filtered = this.filteredProducts;

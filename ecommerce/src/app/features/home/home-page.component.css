@@ -48,6 +48,10 @@ h1 {
   gap: 0.8rem;
 }
 
+.hero-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.55rem; }
+.hero-price span, .hero-price del { color: rgba(255, 255, 255, 0.72); }
+.hero-price strong { color: var(--brand); font-size: 1.55rem; }
+
 .hero-actions a,
 .ghost-btn {
   display: inline-flex;
@@ -189,6 +193,14 @@ h1 {
   box-shadow: var(--shadow);
 }
 
+.promo-strip, .tracking-portal { margin-top: 1.3rem; border: 1px solid var(--line); border-radius: 28px; padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; background: linear-gradient(115deg, var(--accent-strong), var(--accent)); color: #fff; box-shadow: var(--shadow); }
+.promo-strip h2 span { color: var(--brand); }
+.promo-strip p, .tracking-portal p { margin: 0.35rem 0 0; color: rgba(255, 255, 255, 0.76); line-height: 1.55; }
+.promo-strip__form, .tracking-portal__form { display: grid; grid-template-columns: minmax(160px, 1fr) auto; gap: 0.65rem; min-width: min(100%, 420px); }
+.promo-strip input, .tracking-portal input { min-width: 0; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 999px; padding: 0.75rem 1rem; background: rgba(255, 255, 255, 0.96); color: var(--ink); }
+.promo-strip button, .tracking-portal button { border: 0; border-radius: 999px; padding: 0.75rem 1rem; background: var(--brand); color: var(--accent-strong); font-weight: 800; cursor: pointer; }
+.promo-strip small { grid-column: 1 / -1; color: var(--brand); }
+
 .section-slab--split {
   display: flex;
   align-items: center;
@@ -242,6 +254,13 @@ h1 {
   color: var(--muted);
   line-height: 1.6;
 }
+
+.category-card a, .promotion-card a { color: var(--accent-strong); font-weight: 800; text-decoration: none; }
+.promotion-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.3rem; }
+.promotion-card { border-radius: 24px; padding: 1.2rem; border: 1px solid var(--line); background: linear-gradient(145deg, #fff, color-mix(in srgb, var(--brand) 18%, var(--surface-soft))); }
+.promotion-card p { margin: 0 0 0.7rem; color: var(--brand-strong); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.promotion-card h2 { font-size: 1.3rem; }
+.promotion-card span { display: block; margin: 0.55rem 0 1rem; color: var(--muted); line-height: 1.55; }
 
 .benefit-list {
   margin: 0;
@@ -300,6 +319,10 @@ h1 {
   margin-bottom: 0.85rem;
 }
 
+.deal-card .countdown { font-size: 1.4rem; letter-spacing: 0.08em; }
+.trust-row { margin: 1.3rem 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+.trust-row span { border: 1px solid var(--line); border-radius: 18px; padding: 0.9rem; text-align: center; background: var(--surface); color: var(--ink-soft); font-size: 0.86rem; font-weight: 800; }
+
 .deal-card a {
   color: var(--accent-strong);
   font-weight: 700;
@@ -338,7 +361,9 @@ h1 {
   .category-grid,
   .deal-grid,
   .grid,
-  .stats {
+  .stats,
+  .promotion-grid,
+  .trust-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -365,6 +390,12 @@ h1 {
     flex-direction: column;
     align-items: start;
   }
+
+  .promo-strip,
+  .tracking-portal { display: block; }
+
+  .promo-strip__form,
+  .tracking-portal__form { margin-top: 1rem; grid-template-columns: 1fr; }
 }
 
 @keyframes fadeUp {
